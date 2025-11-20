@@ -11,6 +11,8 @@ const segments = [
     "Belt + Socks"
 ];
 
+const GOOGLE_SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/REPLACE_WITH_YOUR_WEB_APP_ID/exec';
+
 const canvas = document.getElementById('wheelCanvas');
 const ctx = canvas.getContext('2d');
 const spinButton = document.getElementById('spinButton');
@@ -18,6 +20,11 @@ const resultEl = document.getElementById('result');
 const modal = document.getElementById('resultModal');
 const modalMessage = document.getElementById('modalMessage');
 const closeModalBtn = document.getElementById('closeModal');
+const userModal = document.getElementById('userInfoModal');
+const userForm = document.getElementById('userInfoForm');
+const userNameInput = document.getElementById('userName');
+const userPhoneInput = document.getElementById('userPhone');
+const userFormError = document.getElementById('userFormError');
 
 const radius = canvas.width / 2;
 const segmentAngle = (Math.PI * 2) / segments.length;
@@ -30,6 +37,7 @@ const baseRotation = pointerAngle;
 
 let rotation = 0;
 let isSpinning = false;
+let userProfile = null;
 
 const segmentColors = ['#ff0303', '#ffffff'];
 
@@ -122,9 +130,11 @@ function announceWinner() {
 
     winningIndex = winningIndex % segments.length;
 
-    const resultText = `You won: ${segments[winningIndex]}!`;
+    const prize = segments[winningIndex];
+    const resultText = `You won: ${prize}!`;
     resultEl.textContent = resultText;
     openModal(resultText);
+    sendResultToSheet(prize);
 }
 
 function spinWheel() {
@@ -197,4 +207,62 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+function openUserModal() {
+    userForm.reset();
+    userFormError.textContent = '';
+    userModal.setAttribute('aria-hidden', 'false');
+    userNameInput.focus();
+}
+
+function closeUserModal() {
+    userModal.setAttribute('aria-hidden', 'true');
+}
+
+userForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const name = userNameInput.value.trim();
+    const phone = userPhoneInput.value.trim();
+
+    if (!name || !phone) {
+        userFormError.textContent = 'Name and phone number are required.';
+        return;
+    }
+
+    userProfile = { name, phone };
+    userFormError.textContent = '';
+    closeUserModal();
+    spinButton.disabled = false;
+    spinButton.focus();
+});
+
+function sendResultToSheet(prize) {
+    if (!userProfile) {
+        console.warn('Skipping sheet sync: user info missing.');
+        return;
+    }
+
+    if (!GOOGLE_SHEET_WEB_APP_URL || GOOGLE_SHEET_WEB_APP_URL.includes('REPLACE_WITH_YOUR_WEB_APP_ID')) {
+        console.warn('Please configure GOOGLE_SHEET_WEB_APP_URL to enable sheet sync.');
+        return;
+    }
+
+    const payload = {
+        name: userProfile.name,
+        phone: userProfile.phone,
+        prize,
+        timestamp: new Date().toISOString(),
+    };
+
+    fetch(GOOGLE_SHEET_WEB_APP_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+    }).catch((error) => {
+        console.error('Failed to send result to Google Sheet:', error);
+    });
+}
+
+openUserModal();
 drawWheel();

@@ -17,7 +17,7 @@
       <header class="app__header">
         <p class="app__header-promotion">❆ December Promotion ❆</p>
         <h1>Lucky Spin</h1>
-        <p>Tap the wheel to find out what you win today.</p>
+        <p>ကံထူးရှင်ဖြစ်ဖို့ Lucky Wheel ကိုအခုပဲလှည့်လိုက်ပါ</p>
       </header>
 
       <section class="wheel">
@@ -34,7 +34,7 @@
           ></canvas>
           <div class="wheel__pointer" aria-hidden="true"></div>
         </div>
-        <button id="spinButton" type="button">Spin the Wheel</button>
+        <button id="spinButton" type="button" disabled>Spin the Wheel</button>
         <p
           id="result"
           class="wheel__result"
@@ -42,6 +42,45 @@
           aria-live="polite"
         ></p>
       </section>
+
+      <div
+        class="modal"
+        id="userInfoModal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="userModalTitle"
+        aria-hidden="true"
+      >
+        <div class="modal__overlay"></div>
+        <div class="modal__content modal__content--form">
+          <h2 id="userModalTitle">Let’s get to know you</h2>
+          <p>Please enter your name and phone number to start spinning.</p>
+          <form id="userInfoForm" class="modal__form">
+            <label class="modal__label" for="userName">Full Name</label>
+            <input
+              id="userName"
+              name="userName"
+              type="text"
+              placeholder="e.g. Zaw Min Soe"
+              autocomplete="name"
+              required
+            />
+
+            <label class="modal__label" for="userPhone">Phone Number</label>
+            <input
+              id="userPhone"
+              name="userPhone"
+              type="tel"
+              placeholder="09xxxxxxxxx"
+              autocomplete="tel"
+              required
+            />
+
+            <p id="userFormError" class="modal__error" role="alert"></p>
+            <button type="submit" class="modal__button">Save & Continue</button>
+          </form>
+        </div>
+      </div>
 
       <div
         class="modal"
