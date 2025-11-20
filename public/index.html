@@ -34,7 +34,7 @@
           ></canvas>
           <div class="wheel__pointer" aria-hidden="true"></div>
         </div>
-        <button id="spinButton" type="button" disabled>Spin the Wheel</button>
+        <button id="spinButton" type="button">Spin the Wheel</button>
         <p
           id="result"
           class="wheel__result"
@@ -45,39 +45,47 @@
 
       <div
         class="modal"
-        id="userInfoModal"
+        id="userModal"
         role="dialog"
         aria-modal="true"
         aria-labelledby="userModalTitle"
-        aria-hidden="true"
+        aria-hidden="false"
       >
         <div class="modal__overlay"></div>
-        <div class="modal__content modal__content--form">
-          <h2 id="userModalTitle">Let’s get to know you</h2>
-          <p>Please enter your name and phone number to start spinning.</p>
-          <form id="userInfoForm" class="modal__form">
-            <label class="modal__label" for="userName">Full Name</label>
+        <div class="modal__content">
+          <h2 id="userModalTitle">မင်္ဂလာပါ</h2>
+          <p class="modal__description">
+            Spin the wheel by first letting us know who you are.
+          </p>
+          <form id="userForm" class="modal__form" novalidate>
+            <label class="modal__label" for="userName">Name</label>
             <input
               id="userName"
-              name="userName"
+              name="name"
               type="text"
-              placeholder="e.g. Zaw Min Soe"
+              placeholder="Enter your name"
               autocomplete="name"
               required
             />
-
-            <label class="modal__label" for="userPhone">Phone Number</label>
+            <label class="modal__label" for="userPhone">Phone</label>
             <input
               id="userPhone"
-              name="userPhone"
+              name="phone"
               type="tel"
-              placeholder="09xxxxxxxxx"
+              inputmode="tel"
+              placeholder="09 123 456 789"
               autocomplete="tel"
               required
             />
-
-            <p id="userFormError" class="modal__error" role="alert"></p>
-            <button type="submit" class="modal__button">Save & Continue</button>
+            <p
+              id="userFormError"
+              class="modal__error"
+              role="alert"
+              aria-live="polite"
+            ></p>
+            <button type="submit" class="modal__button">
+              Save & Continue
+            </button>
           </form>
         </div>
       </div>

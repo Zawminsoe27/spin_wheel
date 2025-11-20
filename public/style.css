@@ -150,11 +150,6 @@ button:not(:disabled):active {
   animation: pop 300ms ease;
 }
 
-.modal__content--form {
-  text-align: left;
-  width: min(420px, 90vw);
-}
-
 .modal__content h2 {
   margin-top: 0;
   color: #e11d48;
@@ -165,6 +160,13 @@ button:not(:disabled):active {
   font-weight: 600;
 }
 
+.modal__description {
+  margin-top: 0.25rem;
+  font-size: 0.95rem;
+  color: #475569;
+  font-weight: 400;
+}
+
 .modal__button {
   width: 100%;
 }
@@ -173,7 +175,7 @@ button:not(:disabled):active {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  margin-top: 1.5rem;
+  text-align: left;
 }
 
 .modal__label {
@@ -182,24 +184,24 @@ button:not(:disabled):active {
 }
 
 .modal__form input {
-  border: 1px solid #e2e8f0;
-  border-radius: 0.75rem;
-  padding: 0.85rem 1rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 0.5rem;
+  border: 1px solid #cbd5f5;
   font-size: 1rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  font-family: inherit;
 }
 
 .modal__form input:focus {
-  outline: none;
-  border-color: #ef4444;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+  outline: 2px solid #ef4444;
+  border-color: transparent;
 }
 
 .modal__error {
-  min-height: 1.25rem;
+  min-height: 1.2rem;
+  margin: 0;
   color: #b91c1c;
   font-size: 0.9rem;
-  margin: 0;
+  font-weight: 600;
 }
 
 @keyframes pop {
