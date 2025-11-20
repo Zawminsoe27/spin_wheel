@@ -7,7 +7,8 @@ const segments = [
     'Hoodie',
     'Baby T-shirt',
     '20% discount',
-    '5% discount'
+    '5% discount',
+    "Belt + Socks"
 ];
 
 const canvas = document.getElementById('wheelCanvas');
@@ -30,7 +31,7 @@ const baseRotation = pointerAngle;
 let rotation = 0;
 let isSpinning = false;
 
-const segmentColors = ['#d90429', '#ffffff'];
+const segmentColors = ['#ff0303', '#ffffff'];
 
 const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
 
