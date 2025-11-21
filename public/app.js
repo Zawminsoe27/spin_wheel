@@ -12,7 +12,7 @@ const segments = [
 ];
 
 const GOOGLE_SHEETS_WEB_APP_URL =
-  "https://script.google.com/macros/s/AKfycbxVYhwO45n-xQJXJFv2Lm8uOFT9TGrQucK-LvJM4rGXBokm0X0Iw5N7Im-t7byUKgF0wg/exec";
+  "https://script.google.com/macros/s/AKfycbxVYhwO45n-xQJXJFv2Lm8uOFT9TGrQucK-LvJM4rGXBokm0X0Iw5N7Im-t7byUKgF0wg/exess";
 
 const canvas = document.getElementById("wheelCanvas");
 const ctx = canvas.getContext("2d");
@@ -40,7 +40,7 @@ let rotation = 0;
 let isSpinning = false;
 let userInfo = null;
 
-const segmentColors = ["#ff0303", "#ffffff"];
+const segmentColors = ["#d503ffff", "#ffffff"];
 
 const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
 
@@ -72,7 +72,7 @@ function drawLabel(text, angle) {
   ctx.translate(radius, radius);
   ctx.rotate(angle);
   ctx.textAlign = "center";
-  ctx.fillStyle = "#000";
+  ctx.fillStyle = segmentColors % 2 === 0 ? "#fff" : "#000";
   ctx.font = '16px "Poppins", sans-serif';
 
   const textRadius = radius * 0.65;
@@ -132,7 +132,8 @@ function announceWinner() {
   winningIndex = winningIndex % segments.length;
 
   const winningPrize = segments[winningIndex];
-  const resultText = `You won: ${winningPrize}!`;
+  const resultText = `ဂုဏ်ယူပါတယ် ${userNameInput.value} သင်သည် ${winningPrize}
+ရရှိပါတယ်`;
   resultEl.textContent = resultText;
   openModal(resultText);
   return winningPrize;
@@ -272,11 +273,10 @@ async function sendResultToSheets(prize) {
 
   try {
     await fetch(GOOGLE_SHEETS_WEB_APP_URL, {
-        method: "POST",
-        mode: "no-cors",
-        body: payload,
-      });
-      
+      method: "POST",
+      mode: "no-cors",
+      body: payload,
+    });
   } catch (error) {
     console.error("Failed to send data to Google Sheets:", error);
   }

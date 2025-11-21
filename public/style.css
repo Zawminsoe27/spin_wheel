@@ -2,6 +2,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  user-select: none;
 }
 
 :root {
@@ -32,7 +33,7 @@ body {
 .app__header h1 {
   margin: 0;
   font-size: clamp(2rem, 3vw, 2.5rem);
-  color: #e11d48;
+  color: #a806e7;
 }
 
 .app__header p {
@@ -93,7 +94,7 @@ canvas {
 button {
   border: none;
   border-radius: 999px;
-  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  background: linear-gradient(135deg, #b700ff, #8819b4);
   color: #fff;
   font-size: 1.1rem;
   font-weight: 600;
@@ -152,7 +153,7 @@ button:not(:disabled):active {
 
 .modal__content h2 {
   margin-top: 0;
-  color: #e11d48;
+  color: #ff0095;
 }
 
 .modal__content p {
@@ -169,6 +170,7 @@ button:not(:disabled):active {
 
 .modal__button {
   width: 100%;
+  background: rgb(255, 1, 221);
 }
 
 .modal__form {
@@ -192,14 +194,14 @@ button:not(:disabled):active {
 }
 
 .modal__form input:focus {
-  outline: 2px solid #ef4444;
+  outline: 2px solid #ff00bf;
   border-color: transparent;
 }
 
 .modal__error {
   min-height: 1.2rem;
   margin: 0;
-  color: #b91c1c;
+  color: #fd008b;
   font-size: 0.9rem;
   font-weight: 600;
 }
@@ -221,8 +223,8 @@ button:not(:disabled):active {
   }
 }
 
-.app__header-promotion {
+.app__header .app__header-promotion {
   font-size: 1.8rem;
   font-weight: 600;
-  color: #ff0037;
+  color: #ff00c8;
 }
